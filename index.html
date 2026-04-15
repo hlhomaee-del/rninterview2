@@ -1545,8 +1545,11 @@ function addScore(pts) {
 // ===== TABS =====
 function switchTab(idx) {
   playClickSound();
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
-  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.tab)===idx));
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    const panelIdx = parseInt(p.id.replace('panel-',''));
+    p.classList.toggle('active', panelIdx===idx);
+  });
   window.scrollTo({top:0, behavior:'smooth'});
 }
 document.querySelectorAll('.tab-btn').forEach(btn => {
