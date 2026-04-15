@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced RN Interview & English Fluency Mastery Lab — Part 2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #FAF7F4;
+  --bg-warm: #FFF8F2;
+  --bg-card: #FFFFFF;
+  --text: #2D2A26;
+  --text-light: #6B6560;
+  --text-muted: #9B9590;
+  --blue: #3B6CB5;
+  --blue-light: #E8F0FE;
+  --blue-dark: #2A4F8A;
+  --green: #2E8B6A;
+  --green-light: #E6F5EF;
+  --green-dark: #1D6B4E;
+  --yellow: #E8A817;
+  --yellow-light: #FFF7E0;
+  --pink: #C06090;
+  --pink-light: #FDE8F0;
+  --purple: #7B5EA7;
+  --purple-light: #F0E8FA;
+  --red: #D04040;
+  --red-light: #FDE8E8;
+  --orange: #D47020;
+  --orange-light: #FFF0E0;
+  --teal: #2A9D8F;
+  --gold: #C8A84E;
+  --border: #E8E2DC;
+  --shadow: 0 2px 12px rgba(45,42,38,0.06);
+  --shadow-lg: 0 8px 32px rgba(45,42,38,0.10);
+  --shadow-hover: 0 12px 40px rgba(45,42,38,0.14);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-warm) 100%);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 1000;
+  box-shadow: 0 1px 8px rgba(45,42,38,0.05);
+}
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; max-width: 1400px; margin: 0 auto;
+}
+.logo { display: flex; align-items: center; gap: 14px; }
+.logo-icon { width: 44px; height: 44px; flex-shrink: 0; }
+.logo-text h1 { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--blue-dark); line-height: 1.2; }
+.logo-text span { font-size: 12px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.5px; }
+.header-stats { display: flex; gap: 16px; align-items: center; }
+.stat-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+}
+.stat-pill.score { background: var(--green-light); color: var(--green-dark); }
+.stat-pill.vocab { background: var(--purple-light); color: var(--purple); }
+.sound-toggle {
+  display: flex; align-items: center; gap: 6px; padding: 5px 14px;
+  border-radius: 16px; border: 1px solid var(--border); background: var(--bg);
+  font-size: 12px; font-weight: 600; color: var(--text-light); cursor: pointer;
+}
+.global-progress { height: 4px; background: var(--border); }
+.global-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--teal), var(--blue), var(--purple));
+  width: 0%; transition: width 0.8s ease; border-radius: 0 2px 2px 0;
+}
+
+/* ===== TAB NAV ===== */
+.tab-nav-wrapper {
+  background: var(--bg-card); border-bottom: 1px solid var(--border);
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.tab-nav-wrapper::-webkit-scrollbar { display: none; }
+.tab-nav { display: flex; max-width: 1400px; margin: 0 auto; padding: 0 16px; gap: 2px; }
+.tab-btn {
+  flex-shrink: 0; padding: 12px 18px; border: none; background: transparent;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  color: var(--text-light); cursor: pointer; border-bottom: 3px solid transparent;
+  transition: var(--transition); white-space: nowrap;
+}
+.tab-btn:hover { color: var(--blue); background: var(--blue-light); }
+.tab-btn.active { color: var(--blue-dark); font-weight: 700; border-bottom-color: var(--blue); }
+.tab-btn .tab-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%; background: var(--border);
+  font-size: 10px; font-weight: 700; margin-right: 6px; transition: var(--transition);
+}
+.tab-btn.active .tab-num { background: var(--blue); color: #fff; }
+.tab-btn.completed .tab-num { background: var(--green); color: #fff; }
+.tab-btn.locked { opacity: 0.45; }
+
+/* ===== MAIN ===== */
+.main-content { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+.tab-panel { display: none; animation: fadeSlideIn 0.5s ease; }
+.tab-panel.active { display: block; }
+@keyframes fadeSlideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+/* ===== SECTION HEADER ===== */
+.section-header {
+  text-align: center; margin-bottom: 40px; padding: 40px 20px;
+  background: linear-gradient(135deg, var(--bg-warm) 0%, #FFF 50%, var(--blue-light) 100%);
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+}
+.section-header .section-icon { width: 64px; height: 64px; margin: 0 auto 16px; }
+.section-header h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--blue-dark); margin-bottom: 8px; }
+.section-header p { font-size: 16px; color: var(--text-light); max-width: 620px; margin: 0 auto; }
+
+/* ===== OBJECTIVES ===== */
+.objectives-box {
+  background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--blue);
+  border-radius: var(--radius); padding: 24px 28px; margin-bottom: 28px; box-shadow: var(--shadow);
+}
+.objectives-box h3 { font-family: var(--font-display); font-size: 18px; color: var(--blue-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.objectives-box ul { list-style: none; padding: 0; }
+.objectives-box li { padding: 6px 0; padding-left: 24px; position: relative; font-size: 15px; }
+.objectives-box li::before { content: '✦'; position: absolute; left: 0; color: var(--teal); font-size: 12px; }
+
+/* ===== SECTION PROGRESS ===== */
+.section-progress {
+  display: flex; align-items: center; gap: 12px; padding: 12px 20px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 24px;
+}
+.section-progress-label { font-size: 13px; font-weight: 600; color: var(--text-light); white-space: nowrap; }
+.section-progress-bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.section-progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--green)); border-radius: 4px; width: 0%; transition: width 0.6s ease; }
+.section-progress-pct { font-size: 14px; font-weight: 700; color: var(--green); min-width: 40px; text-align: right; }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow); transition: var(--transition);
+}
+.card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.card-header h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--text); }
+.card-badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px;
+  border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-strategy { background: var(--blue-light); color: var(--blue); }
+.badge-model { background: var(--green-light); color: var(--green); }
+.badge-caution { background: var(--yellow-light); color: var(--orange); }
+.badge-vocab { background: var(--purple-light); color: var(--purple); }
+.badge-avoid { background: var(--red-light); color: var(--red); }
+.badge-practice { background: var(--pink-light); color: var(--pink); }
+
+/* ===== COMPARE ===== */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.compare-box { border-radius: var(--radius); padding: 20px; border: 1px solid; }
+.compare-box.weak { background: var(--red-light); border-color: #f0c0c0; }
+.compare-box.strong { background: var(--green-light); border-color: #b0dcc8; }
+.compare-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.compare-box.weak .compare-label { color: var(--red); }
+.compare-box.strong .compare-label { color: var(--green-dark); }
+.compare-box blockquote { font-style: italic; line-height: 1.6; font-size: 15px; }
+.compare-rationale { margin-top: 12px; padding-top: 12px; font-size: 13px; color: var(--text-light); }
+.compare-box.weak .compare-rationale { border-top: 1px dashed #e0a0a0; }
+.compare-box.strong .compare-rationale { border-top: 1px dashed #90c8b0; }
+
+/* ===== ACCORDION ===== */
+.accordion { margin: 20px 0; }
+.accordion-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
+.accordion-btn {
+  width: 100%; padding: 16px 20px; background: transparent; border: none;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--text);
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  text-align: left; transition: var(--transition);
+}
+.accordion-btn:hover { background: var(--bg-warm); }
+.accordion-chevron { width: 20px; height: 20px; transition: transform 0.3s ease; flex-shrink: 0; color: var(--text-muted); }
+.accordion-item.open .accordion-chevron { transform: rotate(180deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+.accordion-item.open .accordion-body { max-height: 4000px; padding: 0 20px 20px; }
+
+/* ===== VOCAB ===== */
+.vocab-card {
+  background: linear-gradient(135deg, var(--purple-light) 0%, #FFF 100%);
+  border: 1px solid #D8D0E8; border-radius: var(--radius); padding: 20px; margin: 12px 0;
+  transition: var(--transition); cursor: pointer;
+}
+.vocab-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.vocab-word { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--purple); }
+.vocab-pronunciation { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin: 4px 0; }
+.vocab-persian { font-size: 15px; color: var(--pink); margin: 4px 0; direction: rtl; font-weight: 500; }
+.vocab-example { font-size: 14px; color: var(--text-light); margin-top: 8px; padding-left: 12px; border-left: 3px solid var(--purple); font-style: italic; }
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+
+/* ===== PERSIAN TOGGLE ===== */
+.persian-toggle {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px;
+  border-radius: 16px; border: 1px solid #D8D0E8; background: var(--purple-light);
+  color: var(--purple); font-size: 12px; font-weight: 600; cursor: pointer; transition: var(--transition);
+}
+.persian-toggle:hover { background: var(--purple); color: #fff; }
+.persian-hidden { display: none; }
+.persian-visible {
+  display: block; background: var(--pink-light); border-radius: var(--radius-sm);
+  padding: 12px 16px; margin-top: 8px; direction: rtl; text-align: right;
+  font-size: 15px; color: var(--pink); animation: fadeIn 0.3s ease;
+}
+
+/* ===== REVEAL ===== */
+.reveal-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+  border-radius: 20px; border: 2px solid var(--green); background: transparent;
+  color: var(--green); font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+}
+.reveal-btn:hover { background: var(--green); color: #fff; }
+.reveal-btn.native { border-color: var(--teal); color: var(--teal); }
+.reveal-btn.native:hover { background: var(--teal); color: #fff; }
+.reveal-btn.upgrade { border-color: var(--purple); color: var(--purple); }
+.reveal-btn.upgrade:hover { background: var(--purple); color: #fff; }
+.reveal-content { display: none; margin-top: 12px; padding: 16px 20px; border-radius: var(--radius); animation: fadeSlideIn 0.4s ease; }
+.reveal-content.shown { display: block; }
+.reveal-content.model-answer { background: var(--green-light); border: 1px solid #b0dcc8; }
+.reveal-content.native-version { background: linear-gradient(135deg, #E8F8F5, #FFF); border: 1px solid #B0E0D4; }
+.reveal-content.upgrade-version { background: var(--purple-light); border: 1px solid #D0C0E8; }
+
+/* ===== Q-CARD ===== */
+.q-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow); }
+.q-card-header { padding: 20px 24px; background: linear-gradient(135deg, var(--blue-light) 0%, #FFF 100%); border-bottom: 1px solid var(--border); }
+.q-card-header h4 { font-family: var(--font-display); font-size: 18px; color: var(--blue-dark); margin-bottom: 4px; }
+.q-card-header .q-subtitle { font-size: 13px; color: var(--text-muted); }
+.q-card-body { padding: 24px; }
+
+/* ===== STRUCTURE BOX ===== */
+.structure-box { background: linear-gradient(135deg, var(--blue-light) 0%, #FFF 100%); border: 1px solid #C0D4F0; border-radius: var(--radius); padding: 24px; margin: 16px 0; }
+.structure-step { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px dashed #C0D4F0; }
+.structure-step:last-child { border-bottom: none; }
+.structure-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.structure-text { font-size: 15px; }
+.structure-text strong { color: var(--blue-dark); }
+
+/* ===== CALLOUTS ===== */
+.callout { border-radius: var(--radius); padding: 18px 22px; margin: 16px 0; font-size: 14px; }
+.callout.mistake { background: var(--orange-light); border: 1px solid #F0D0A0; border-left: 4px solid var(--orange); }
+.callout.tip { background: var(--green-light); border: 1px solid #b0dcc8; border-left: 4px solid var(--green); }
+.callout.warning { background: var(--yellow-light); border: 1px solid #F0D890; border-left: 4px solid var(--yellow); }
+.callout-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.callout.mistake .callout-label { color: var(--orange); }
+.callout.tip .callout-label { color: var(--green); }
+.callout.warning .callout-label { color: var(--yellow); }
+
+/* ===== PRACTICE ===== */
+.practice-options { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.practice-option {
+  padding: 10px 20px; border-radius: var(--radius-sm); border: 2px solid var(--border);
+  background: var(--bg-card); font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: var(--transition);
+}
+.practice-option:hover { border-color: var(--blue); background: var(--blue-light); }
+.practice-option.correct { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+.practice-option.incorrect { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-area { background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin: 20px 0; }
+.quiz-area h4 { font-family: var(--font-display); color: var(--blue-dark); margin-bottom: 12px; }
+.quiz-feedback { margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 14px; display: none; }
+.quiz-feedback.correct { display: block; background: var(--green-light); border: 1px solid #b0dcc8; color: var(--green-dark); }
+.quiz-feedback.incorrect { display: block; background: var(--red-light); border: 1px solid #f0c0c0; color: var(--red); }
+
+/* ===== SELF RATING ===== */
+.self-rating { display: flex; align-items: center; gap: 8px; margin: 16px 0; }
+.self-rating span { font-size: 14px; font-weight: 600; color: var(--text-light); }
+.rating-star { width: 28px; height: 28px; cursor: pointer; transition: transform 0.2s ease; color: var(--border); }
+.rating-star:hover { transform: scale(1.2); }
+.rating-star.filled { color: var(--gold); }
+
+/* ===== PHRASE BANK ===== */
+.phrase-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.phrase-chip {
+  padding: 5px 12px; border-radius: 16px; background: var(--blue-light); color: var(--blue);
+  font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: var(--transition); user-select: none;
+}
+.phrase-chip:hover { background: var(--blue); color: #fff; }
+.phrase-chip.selected { background: var(--blue); color: #fff; border-color: var(--blue-dark); }
+
+/* ===== ANSWER BUILDER ===== */
+.answer-builder { background: var(--bg-card); border: 2px solid var(--blue); border-radius: var(--radius-lg); padding: 28px; margin: 24px 0; }
+.answer-builder h3 { font-family: var(--font-display); color: var(--blue-dark); margin-bottom: 16px; }
+.builder-step { margin-bottom: 16px; }
+.builder-step label { display: block; font-weight: 600; font-size: 14px; color: var(--blue); margin-bottom: 6px; }
+.builder-step textarea {
+  width: 100%; min-height: 70px; padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 15px; line-height: 1.6; resize: vertical;
+  transition: var(--transition); background: var(--bg);
+}
+.builder-step textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,108,181,0.15); }
+.builder-step textarea::placeholder { color: var(--text-muted); font-style: italic; }
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 24px;
+  border: none; background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: #fff;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: var(--transition); box-shadow: 0 4px 16px rgba(59,108,181,0.25);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(59,108,181,0.35); }
+.btn-complete-section {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px;
+  border-radius: var(--radius); border: 2px solid var(--green); background: var(--green-light);
+  color: var(--green-dark); font-family: var(--font-body); font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: var(--transition); margin-top: 32px;
+}
+.btn-complete-section:hover { background: var(--green); color: #fff; }
+.btn-complete-section.done { background: var(--green); color: #fff; cursor: default; }
+
+/* ===== SUB TABS ===== */
+.sub-tabs { display: flex; gap: 4px; padding: 8px; background: var(--bg); border-radius: var(--radius); margin-bottom: 20px; overflow-x: auto; }
+.sub-tab-btn {
+  padding: 8px 16px; border: none; background: transparent; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-light);
+  cursor: pointer; transition: var(--transition); white-space: nowrap;
+}
+.sub-tab-btn:hover { background: var(--bg-card); color: var(--text); }
+.sub-tab-btn.active { background: var(--bg-card); color: var(--blue); font-weight: 700; box-shadow: var(--shadow); }
+.sub-panel { display: none; animation: fadeIn 0.3s ease; }
+.sub-panel.active { display: block; }
+
+/* ===== PHILOSOPHY PILLAR ===== */
+.pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 20px 0; }
+.pillar-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
+  text-align: center; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden;
+}
+.pillar-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.pillar-card.expanded { border-color: var(--teal); background: linear-gradient(135deg, #E8F8F5, #FFF); }
+.pillar-card .pillar-icon { font-size: 28px; margin-bottom: 8px; }
+.pillar-card h4 { font-family: var(--font-display); font-size: 15px; margin-bottom: 4px; color: var(--text); }
+.pillar-card .pillar-persian { font-size: 13px; color: var(--pink); direction: rtl; }
+.pillar-card .pillar-detail {
+  display: none; text-align: left; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+  font-size: 14px; color: var(--text-light);
+}
+.pillar-card.expanded .pillar-detail { display: block; }
+
+/* ===== STAR METHOD ===== */
+.star-box {
+  border-radius: var(--radius-lg); padding: 24px; margin: 16px 0;
+  background: linear-gradient(135deg, var(--bg-warm), #FFF, var(--green-light));
+  border: 1px solid #D0E0D4;
+}
+.star-letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%; font-size: 16px; font-weight: 800;
+  font-family: var(--font-display); color: #fff; flex-shrink: 0;
+}
+.star-letter.s { background: var(--blue); }
+.star-letter.t { background: var(--teal); }
+.star-letter.a { background: var(--purple); }
+.star-letter.r { background: var(--green); }
+
+/* ===== PHRASE UPGRADE TABLE ===== */
+.upgrade-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 16px 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.upgrade-table th { background: var(--blue-light); color: var(--blue-dark); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; }
+.upgrade-table td { padding: 12px 16px; font-size: 14px; border-top: 1px solid var(--border); }
+.upgrade-table tr:hover td { background: var(--bg-warm); }
+.upgrade-table .weak-col { color: var(--red); font-style: italic; }
+.upgrade-table .strong-col { color: var(--green-dark); font-weight: 600; }
+.upgrade-table .persian-col { color: var(--pink); direction: rtl; text-align: right; font-size: 13px; }
+
+/* ===== SCORE TOAST ===== */
+.score-toast {
+  position: fixed; top: 80px; right: 24px; padding: 12px 20px; border-radius: var(--radius);
+  background: var(--green); color: #fff; font-weight: 600; font-size: 14px; z-index: 9999;
+  transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: var(--shadow-lg);
+}
+.score-toast.show { transform: translateX(0); }
+
+/* ===== SCENARIO CARD ===== */
+.scenario-card {
+  background: linear-gradient(135deg, var(--bg-warm), #FFF); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px; margin: 20px 0; position: relative;
+}
+.scenario-card::before {
+  content: attr(data-scenario); position: absolute; top: -10px; left: 20px;
+  background: var(--blue); color: #fff; padding: 3px 14px; border-radius: 10px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.scenario-card h4 { font-family: var(--font-display); color: var(--blue-dark); margin-bottom: 8px; margin-top: 4px; }
+.scenario-card .scenario-prompt { font-style: italic; color: var(--text-light); margin-bottom: 16px; font-size: 15px; }
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu-btn { display: none; padding: 8px; border: none; background: transparent; cursor: pointer; color: var(--text); }
+
+/* ===== PLACEHOLDER ===== */
+.placeholder-section { text-align: center; padding: 60px 24px; color: var(--text-muted); }
+.placeholder-section h3 { font-family: var(--font-display); font-size: 24px; margin-bottom: 12px; color: var(--text-light); }
+
+/* ===== FOOTER ===== */
+.site-footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); background: var(--bg-card); font-size: 14px; color: var(--text-muted); }
+.site-footer strong { color: var(--text); font-family: var(--font-display); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header-top { padding: 10px 16px; }
+  .logo-text h1 { font-size: 15px; }
+  .header-stats { display: none; }
+  .mobile-menu-btn { display: block; }
+  .main-content { padding: 20px 16px 80px; }
+  .section-header { padding: 28px 16px; }
+  .section-header h2 { font-size: 22px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .answer-builder { padding: 20px; }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .tab-btn { padding: 10px 12px; font-size: 12px; }
+  .card { padding: 20px; }
+  .q-card-body { padding: 16px; }
+  .pillar-grid { grid-template-columns: 1fr 1fr; }
+  .upgrade-table { font-size: 13px; }
+  .upgrade-table td, .upgrade-table th { padding: 8px 10px; }
+}
+@media (max-width: 480px) {
+  .logo-icon { width: 36px; height: 36px; }
+  .logo-text h1 { font-size: 14px; }
+  .pillar-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCORE TOAST -->
+<div class="score-toast" id="scoreToast">+10 Points!</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 44 44" fill="none">
+        <circle cx="22" cy="22" r="21" fill="#E8F0FE" stroke="#3B6CB5" stroke-width="1.5"/>
+        <path d="M22 12 L22 20 M18 24 Q18 28 22 30 Q26 28 26 24 M16 20 L28 20 Q30 20 30 22 L30 24 Q30 28 26 30 L22 32 L18 30 Q14 28 14 24 L14 22 Q14 20 16 20Z" stroke="#3B6CB5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="22" cy="16" r="3" fill="#3B6CB5" opacity="0.2"/>
+        <path d="M19 16 L21 18 L25 14" stroke="#3B6CB5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <h1>Advanced RN Interview & English Fluency Mastery Lab</h1>
+        <span>Part 2 · Care Philosophy · Behavioral · Teamwork</span>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-pill score">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+        <span id="totalScoreNum">0</span> pts
+      </div>
+      <div class="stat-pill vocab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+        <span id="vocabCount">0</span> words
+      </div>
+      <button class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07" id="soundWave1"/></svg>
+        <span id="soundLabel">Sound On</span>
+      </button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileStats()" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="global-progress"><div class="global-progress-fill" id="globalProgressFill" style="width:25%"></div></div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav-wrapper">
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn locked" data-tab="0"><span class="tab-num">1</span>Welcome</button>
+    <button class="tab-btn locked" data-tab="1"><span class="tab-num">2</span>About Yourself</button>
+    <button class="tab-btn locked" data-tab="2"><span class="tab-num">3</span>Core Questions</button>
+    <button class="tab-btn active" data-tab="3"><span class="tab-num">4</span>Care Philosophy</button>
+    <button class="tab-btn" data-tab="4"><span class="tab-num">5</span>Behavioral</button>
+    <button class="tab-btn" data-tab="5"><span class="tab-num">6</span>Conflict & Team</button>
+    <button class="tab-btn locked" data-tab="6"><span class="tab-num">7</span>Clinical Language</button>
+    <button class="tab-btn locked" data-tab="7"><span class="tab-num">8</span>Vocabulary Lab</button>
+    <button class="tab-btn locked" data-tab="8"><span class="tab-num">9</span>Fluency Lab</button>
+    <button class="tab-btn locked" data-tab="9"><span class="tab-num">10</span>Simulation</button>
+    <button class="tab-btn locked" data-tab="10"><span class="tab-num">11</span>Answer Studio</button>
+    <button class="tab-btn locked" data-tab="11"><span class="tab-num">12</span>Rapid Review</button>
+  </div>
+</nav>
+
+<main class="main-content">
+
+<!-- ============================================================ -->
+<!-- TAB 3: PATIENT CARE PHILOSOPHY                                 -->
+<!-- ============================================================ -->
+<div class="tab-panel active" id="panel-3">
+  <div class="section-header" style="background: linear-gradient(135deg, #FDE8F0 0%, #FFF 50%, #E6F5EF 100%);">
+    <svg class="section-icon" viewBox="0 0 64 64" fill="none">
+      <path d="M32 56 C32 56 8 40 8 24 C8 14 16 8 24 8 C28 8 31 10 32 14 C33 10 36 8 40 8 C48 8 56 14 56 24 C56 40 32 56 32 56Z" fill="#FDE8F0" stroke="#C06090" stroke-width="2"/>
+      <path d="M26 28 L30 32 L38 22" stroke="#2E8B6A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2>Patient Care Philosophy</h2>
+    <p>Learn to express your nursing values beautifully, naturally, and memorably — so the interviewer sees who you truly are as a nurse.</p>
+  </div>
+
+  <div class="section-progress">
+    <span class="section-progress-label">Section Progress</span>
+    <div class="section-progress-bar"><div class="section-progress-fill" id="progress-3" style="width:0%"></div></div>
+    <span class="section-progress-pct" id="progress-pct-3">0%</span>
+  </div>
+
+  <div class="objectives-box">
+    <h3>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      What You Will Learn
+    </h3>
+    <ul>
+      <li>How to articulate your nursing philosophy with depth and authenticity</li>
+      <li>Key pillars of patient-centered care and the vocabulary to express them</li>
+      <li>How to weave your values into interview answers naturally</li>
+      <li>Persian translations for core care philosophy concepts</li>
+      <li>How to sound passionate without sounding scripted</li>
+    </ul>
+  </div>
+
+  <!-- Sub-tabs -->
+  <div class="sub-tabs">
+    <button class="sub-tab-btn active" onclick="switchSubTab('philo', 0, this)">Core Pillars</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('philo', 1, this)">Express Your Philosophy</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('philo', 2, this)">Vocabulary</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('philo', 3, this)">Build Your Statement</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('philo', 4, this)">Practice</button>
+  </div>
+
+  <!-- Sub 0: Core Pillars -->
+  <div class="sub-panel active" id="philo-sub-0">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-strategy">Foundation</span>
+        <h3>The Pillars of Nursing Care Philosophy</h3>
+      </div>
+      <p style="margin-bottom:8px">Click each pillar to explore the concept and learn how to express it in an interview.</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">💛</div>
+          <h4>Compassion</h4>
+          <div class="pillar-persian">دلسوزی</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "I believe that compassion isn't just a feeling — it's a practice. It means being fully present with each patient and responding to their needs with both clinical skill and genuine warmth."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🎯</div>
+          <h4>Patient-Centered Care</h4>
+          <div class="pillar-persian">مراقبت بیمارمحور</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "I place the patient at the center of every decision. I actively involve them in their care plan and respect their preferences, values, and cultural background."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🛡️</div>
+          <h4>Safety</h4>
+          <div class="pillar-persian">ایمنی</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "Patient safety is the foundation of everything I do. I'm meticulous about protocols, and I'm not afraid to speak up when something doesn't feel right."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🤝</div>
+          <h4>Advocacy</h4>
+          <div class="pillar-persian">حمایت / وکالت از بیمار</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "I see myself as my patient's advocate. When a patient can't speak for themselves, I make sure their voice is heard — whether that means questioning an order or ensuring their concerns reach the right team member."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">👂</div>
+          <h4>Empathy</h4>
+          <div class="pillar-persian">همدلی</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "Empathy, for me, means stepping into my patient's experience — understanding not just what they need clinically, but what they're feeling emotionally. That understanding shapes how I communicate and how I provide care."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">✊</div>
+          <h4>Dignity & Respect</h4>
+          <div class="pillar-persian">کرامت و احترام</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "Every patient deserves to be treated with dignity, regardless of their background or condition. I make a conscious effort to preserve their privacy, autonomy, and sense of self throughout their care."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🧩</div>
+          <h4>Teamwork</h4>
+          <div class="pillar-persian">کار تیمی</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "I believe the best patient outcomes come from genuine collaboration. I actively communicate with physicians, therapists, social workers, and fellow nurses to ensure coordinated, holistic care."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🌍</div>
+          <h4>Cultural Sensitivity</h4>
+          <div class="pillar-persian">حساسیت فرهنگی</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "I recognize that each patient brings their own cultural context to their care experience. I approach cultural differences with curiosity and respect, adapting my communication and care approach accordingly."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">📋</div>
+          <h4>Attention to Detail</h4>
+          <div class="pillar-persian">توجه به جزئیات</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "In nursing, the smallest detail can be the difference between a good outcome and a preventable error. I'm thorough with my assessments, documentation, and medication verification because I know precision saves lives."</p>
+          </div>
+        </div>
+        <div class="pillar-card" onclick="togglePillar(this)">
+          <div class="pillar-icon">🎓</div>
+          <h4>Professionalism</h4>
+          <div class="pillar-persian">حرفه‌ای بودن</div>
+          <div class="pillar-detail">
+            <p><strong>In an interview say:</strong> "Professionalism, for me, means maintaining composure, communicating with integrity, staying current with evidence-based practices, and always holding myself to the highest standard of care."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-label">💡 Pro Tip</div>
+        You don't need to mention all ten pillars. Choose the <strong>3–4 that resonate most</strong> with your genuine nursing identity and develop them deeply. Authenticity always beats a checklist.
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 1: Express Your Philosophy -->
+  <div class="sub-panel" id="philo-sub-1">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-model">Model</span>
+        <h3>How to Express Your Philosophy Naturally</h3>
+      </div>
+
+      <p style="margin-bottom:16px">When interviewers ask <em>"What is your nursing philosophy?"</em> or <em>"How would you describe your approach to patient care?"</em> — they want to hear something <strong>real and personal</strong>, not a textbook definition.</p>
+
+      <div class="compare-grid">
+        <div class="compare-box weak">
+          <div class="compare-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--red)"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6" stroke="#fff" stroke-width="2"/></svg>
+            Flat & Generic
+          </div>
+          <blockquote>"My philosophy is to take care of patients well and treat them with respect. I think patients should come first. I try to be a good nurse."</blockquote>
+          <div class="compare-rationale"><strong>Why it's weak:</strong> Vague, no depth, no personal voice. Every nurse could say this. It doesn't distinguish you or reveal what kind of nurse you really are.</div>
+        </div>
+        <div class="compare-box strong">
+          <div class="compare-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            Polished & Authentic
+          </div>
+          <blockquote>"My nursing philosophy is built on the belief that every patient is more than a diagnosis — they're a whole person with fears, hopes, and a story that matters. I approach care by combining rigorous clinical assessment with genuine human connection. I've learned that when patients feel truly heard and respected, they're more engaged in their recovery, and outcomes improve. I'm also a firm believer in collaborative care — I see myself as one member of a team working toward the same goal: the best possible outcome for every patient."</blockquote>
+          <div class="compare-rationale"><strong>Why it works:</strong> Personal, specific, nuanced. Connects values to outcomes. Uses advanced but natural language. Shows emotional intelligence and professional maturity.</div>
+        </div>
+      </div>
+
+      <div class="callout mistake">
+        <div class="callout-label">⚠ Common Non-Native Speaker Mistake</div>
+        <p>Many advanced ESL speakers memorize definitions from nursing textbooks and recite them. Interviewers can tell instantly. Instead, <strong>speak from experience</strong>: think of a real moment that shaped your values, and let that story anchor your philosophy.</p>
+      </div>
+
+      <button class="persian-toggle" onclick="togglePersian(this)" style="margin-top:12px">🇮🇷 Philosophy Phrases in Persian</button>
+      <div class="persian-hidden">
+        <div class="persian-visible" style="display:block;margin-top:8px">
+          <p><strong>more than a diagnosis</strong> — بیشتر از یک تشخیص</p>
+          <p><strong>genuine human connection</strong> — ارتباط انسانی واقعی</p>
+          <p><strong>rigorous clinical assessment</strong> — ارزیابی بالینی دقیق</p>
+          <p><strong>collaborative care</strong> — مراقبت مشارکتی</p>
+          <p><strong>the best possible outcome</strong> — بهترین نتیجه ممکن</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 2: Vocabulary -->
+  <div class="sub-panel" id="philo-sub-2">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-vocab">Vocabulary Upgrade</span>
+        <h3>Philosophy & Values Vocabulary</h3>
+      </div>
+
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">holistic care</div>
+          <div class="vocab-pronunciation">/hoʊˈlɪs·tɪk kɛr/</div>
+          <div class="vocab-persian">مراقبت جامع / کل‌نگرانه</div>
+          <div class="vocab-example">"I provide holistic care that addresses physical, emotional, and spiritual needs."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">therapeutic rapport</div>
+          <div class="vocab-pronunciation">/ˌθɛr·əˈpjuː·tɪk ræˈpɔːr/</div>
+          <div class="vocab-persian">رابطه درمانی</div>
+          <div class="vocab-example">"Building therapeutic rapport with patients is essential to effective care."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">autonomy</div>
+          <div class="vocab-pronunciation">/ɔːˈtɑː·nə·mi/</div>
+          <div class="vocab-persian">خودمختاری / استقلال بیمار</div>
+          <div class="vocab-example">"I always respect my patient's autonomy and right to informed decision-making."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">evidence-based practice</div>
+          <div class="vocab-pronunciation">/ˈɛv·ɪ·dəns beɪst ˈpræk·tɪs/</div>
+          <div class="vocab-persian">عملکرد مبتنی بر شواهد</div>
+          <div class="vocab-example">"My practice is grounded in current evidence and best practices."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">culturally competent</div>
+          <div class="vocab-pronunciation">/ˈkʌl·tʃər·əl·i ˈkɑːm·pɪ·tənt/</div>
+          <div class="vocab-persian">دارای صلاحیت فرهنگی</div>
+          <div class="vocab-example">"I strive to deliver culturally competent care to every patient."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">preserve dignity</div>
+          <div class="vocab-pronunciation">/prɪˈzɜːrv ˈdɪɡ·nɪ·ti/</div>
+          <div class="vocab-persian">حفظ کرامت</div>
+          <div class="vocab-example">"I make every effort to preserve my patient's dignity and comfort."</div>
+        </div>
+      </div>
+
+      <div class="quiz-area" id="quiz-philo-1" style="margin-top:24px">
+        <h4>Vocabulary Check: Choose the most natural phrasing</h4>
+        <p style="font-size:14px;color:var(--text-light);margin-bottom:12px">Which sentence sounds most polished in an interview?</p>
+        <div class="practice-options">
+          <button class="practice-option" onclick="checkQuiz(this, false, 'quiz-philo-1')">"I care about all the parts of the patient."</button>
+          <button class="practice-option" onclick="checkQuiz(this, true, 'quiz-philo-1')">"I provide holistic care that addresses physical, emotional, and spiritual needs."</button>
+          <button class="practice-option" onclick="checkQuiz(this, false, 'quiz-philo-1')">"I try to think about the patient's whole body and mind."</button>
+        </div>
+        <div class="quiz-feedback" id="quiz-philo-1-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 3: Build Your Statement -->
+  <div class="sub-panel" id="philo-sub-3">
+    <div class="answer-builder">
+      <h3>🏗️ Build Your Personal Care Philosophy Statement</h3>
+      <p style="margin-bottom:20px;color:var(--text-light)">Compose a 3–4 sentence philosophy statement. Use the phrase chips for inspiration, but write in your own voice.</p>
+
+      <div class="builder-step">
+        <label>Core Belief — What do you believe about patients?</label>
+        <textarea id="philo-b-1" placeholder="Example: I believe that every patient deserves to be treated as a whole person..."></textarea>
+        <div class="phrase-bank">
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-1', this.textContent)">I believe every patient</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-1', this.textContent)">is more than a diagnosis</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-1', this.textContent)">deserves to be treated with dignity</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-1', this.textContent)">has a unique story</span>
+        </div>
+      </div>
+
+      <div class="builder-step">
+        <label>Your Approach — How do you care for patients?</label>
+        <textarea id="philo-b-2" placeholder="Example: I combine rigorous clinical assessment with genuine human connection..."></textarea>
+        <div class="phrase-bank">
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-2', this.textContent)">I combine clinical precision with</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-2', this.textContent)">genuine compassion</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-2', this.textContent)">evidence-based practice</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-2', this.textContent)">holistic, patient-centered care</span>
+        </div>
+      </div>
+
+      <div class="builder-step">
+        <label>Why It Matters — How does this affect outcomes?</label>
+        <textarea id="philo-b-3" placeholder="Example: When patients feel truly heard and respected, they engage more actively in their recovery..."></textarea>
+        <div class="phrase-bank">
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-3', this.textContent)">When patients feel heard</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-3', this.textContent)">outcomes improve</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-3', this.textContent)">trust is built</span>
+          <span class="phrase-chip" onclick="insertPhrase('philo-b-3', this.textContent)">recovery is more meaningful</span>
+        </div>
+      </div>
+
+      <button class="reveal-btn" onclick="combinePhilo()" style="margin-top:12px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Preview My Philosophy Statement
+      </button>
+      <div class="reveal-content model-answer" id="combinedPhilo"></div>
+    </div>
+  </div>
+
+  <!-- Sub 4: Practice -->
+  <div class="sub-panel" id="philo-sub-4">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-practice">Speaking Practice</span>
+        <h3>Practice Expressing Your Values</h3>
+      </div>
+
+      <div class="q-card" style="margin:16px 0">
+        <div class="q-card-header">
+          <h4>Prompt: "What is your nursing philosophy?"</h4>
+          <span class="q-subtitle">Speak for 45–60 seconds. Be authentic. Don't recite — express.</span>
+        </div>
+        <div class="q-card-body">
+          <p style="color:var(--text-light);margin-bottom:12px">Imagine the interviewer leans forward and says warmly: <em>"Tell me — what's your personal philosophy when it comes to patient care?"</em></p>
+          <p style="margin-bottom:16px">Speak your answer aloud now. Then rate yourself:</p>
+          <div class="self-rating" id="rating-philo-1">
+            <span>My confidence:</span>
+            <svg class="rating-star" onclick="rateStar(this, 1, 'rating-philo-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this, 2, 'rating-philo-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this, 3, 'rating-philo-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this, 4, 'rating-philo-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this, 5, 'rating-philo-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+          </div>
+          <button class="reveal-btn native" onclick="toggleReveal('philo-model-1')" style="margin-top:8px">🎯 Compare with Model Answer</button>
+          <div class="reveal-content native-version" id="philo-model-1">
+            <p><strong>Model:</strong> "My nursing philosophy centers on the belief that healing goes beyond treating symptoms — it's about caring for the whole person. I combine thorough clinical assessment with genuine empathy, because I've seen firsthand how a patient's emotional state directly affects their recovery. I'm committed to evidence-based practice, and I believe in treating every patient with the same level of respect and attentiveness, regardless of their background. Ultimately, I want each patient to feel that they're in safe, competent, and compassionate hands."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card" style="margin:16px 0">
+        <div class="q-card-header">
+          <h4>Prompt: "How do you handle cultural differences in patient care?"</h4>
+          <span class="q-subtitle">This is a common follow-up. Prepare a thoughtful response.</span>
+        </div>
+        <div class="q-card-body">
+          <textarea style="width:100%;min-height:90px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="Write your answer here... Think about curiosity, respect, and adaptation..."></textarea>
+          <button class="reveal-btn native" onclick="toggleReveal('philo-model-2')" style="margin-top:12px">🎯 Show Model Response</button>
+          <div class="reveal-content native-version" id="philo-model-2">
+            <p><strong>Model:</strong> "I approach cultural differences with genuine curiosity and respect. I ask patients about their preferences — whether it's dietary restrictions, family involvement in decision-making, or spiritual practices that are important to them. I've found that showing a willingness to learn and adapt builds tremendous trust. I also recognize that cultural competence is an ongoing journey, not a destination, so I actively educate myself and remain open to feedback from patients and colleagues."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-complete-section" id="complete-3" onclick="completeSection(3)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+    Mark Patient Care Philosophy Complete
+  </button>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: BEHAVIORAL INTERVIEW SCENARIOS                          -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-4">
+  <div class="section-header" style="background: linear-gradient(135deg, var(--purple-light) 0%, #FFF 50%, var(--green-light) 100%);">
+    <svg class="section-icon" viewBox="0 0 64 64" fill="none">
+      <rect x="6" y="12" width="52" height="40" rx="6" fill="#F0E8FA" stroke="#7B5EA7" stroke-width="2"/>
+      <path d="M20 28h24M20 36h16M20 44h8" stroke="#7B5EA7" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="50" cy="16" r="8" fill="#E6F5EF" stroke="#2E8B6A" stroke-width="2"/>
+      <path d="M48 16l2 2 4-4" stroke="#2E8B6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <h2>Behavioral Interview Scenarios</h2>
+    <p>Master the STAR method and learn to tell compelling professional stories that demonstrate your competence.</p>
+  </div>
+
+  <div class="section-progress">
+    <span class="section-progress-label">Section Progress</span>
+    <div class="section-progress-bar"><div class="section-progress-fill" id="progress-4" style="width:0%"></div></div>
+    <span class="section-progress-pct" id="progress-pct-4">0%</span>
+  </div>
+
+  <div class="objectives-box">
+    <h3>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      What You Will Learn
+    </h3>
+    <ul>
+      <li>How to use the STAR method elegantly — not mechanically</li>
+      <li>How to choose strong action verbs that elevate your story</li>
+      <li>Model answers for the most common behavioral questions</li>
+      <li>How to show clinical judgment, leadership, and emotional intelligence through stories</li>
+      <li>Persian support for key behavioral vocabulary</li>
+    </ul>
+  </div>
+
+  <!-- STAR Method Card -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-badge badge-strategy">Framework</span>
+      <h3>The STAR Method — Elegantly Applied</h3>
+    </div>
+    <p style="margin-bottom:16px">The STAR method helps you give <strong>structured, specific</strong> answers to behavioral questions. But the key is to make it sound like a natural story — not a four-part essay.</p>
+
+    <div class="star-box">
+      <div class="structure-step">
+        <div class="star-letter s">S</div>
+        <div class="structure-text"><strong>Situation</strong> — Set the scene briefly. Where were you? What was the context?<br><em>"During a particularly busy night shift on my medical-surgical unit…"</em></div>
+      </div>
+      <div class="structure-step">
+        <div class="star-letter t">T</div>
+        <div class="structure-text"><strong>Task</strong> — What was your specific responsibility or challenge?<br><em>"I was responsible for managing six patients, including one whose condition was rapidly deteriorating…"</em></div>
+      </div>
+      <div class="structure-step">
+        <div class="star-letter a">A</div>
+        <div class="structure-text"><strong>Action</strong> — What did YOU do? Use strong, specific verbs. This is the longest part.<br><em>"I immediately assessed the patient, initiated the rapid response protocol, and communicated my concerns clearly to the attending physician…"</em></div>
+      </div>
+      <div class="structure-step">
+        <div class="star-letter r">R</div>
+        <div class="structure-text"><strong>Result</strong> — What was the outcome? What did you learn?<br><em>"The patient was stabilized and transferred to the ICU within 30 minutes. That experience reinforced my belief in the importance of early intervention and assertive communication."</em></div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Making STAR Sound Natural</div>
+      <p>Don't announce the method: <em>"The situation was… the task was… the action was…"</em> Instead, weave the elements into a flowing narrative. The interviewer should hear a <strong>story</strong>, not a template.</p>
+    </div>
+
+    <button class="persian-toggle" onclick="togglePersian(this)" style="margin-top:8px">🇮🇷 STAR in Persian</button>
+    <div class="persian-hidden">
+      <div class="persian-visible" style="display:block;margin-top:8px">
+        <p><strong>Situation (وضعیت):</strong> صحنه را مختصر توصیف کن</p>
+        <p><strong>Task (وظیفه):</strong> مسئولیت تو چه بود؟</p>
+        <p><strong>Action (اقدام):</strong> دقیقاً چه کردی؟ با افعال قوی</p>
+        <p><strong>Result (نتیجه):</strong> نتیجه چه شد و چه یاد گرفتی؟</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 1 -->
+  <div class="scenario-card" data-scenario="Scenario 1">
+    <h4>"Tell me about a time you dealt with a difficult patient."</h4>
+    <p class="scenario-prompt">This tests your patience, emotional intelligence, and de-escalation skills.</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Polished STAR Answer</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="compare-box strong" style="margin:0">
+            <blockquote>"I once cared for a post-surgical patient who was extremely anxious and became verbally aggressive toward staff, refusing medications and threatening to leave AMA. Rather than taking it personally, I recognized that his behavior was driven by fear and pain. I sat down at his bedside, made eye contact, and said: 'I can see you're frustrated, and I want to understand what's going on so I can help.' After a few minutes of active listening, he opened up about his fear of a poor prognosis. I validated his feelings, explained his treatment plan step by step, and involved him in decisions about his care. By the end of my shift, he had taken his medication, thanked me, and even apologized for his earlier behavior. That experience taught me that behind every 'difficult' patient is usually a frightened person who needs to feel heard."</blockquote>
+          </div>
+          <div class="callout tip" style="margin-top:12px">
+            <div class="callout-label">Why This Works</div>
+            <p>Shows empathy, active listening, de-escalation, patient-centered communication, and reflection. Uses advanced phrases like "driven by fear," "validated his feelings," and "AMA." Ends with a lesson learned.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-vocab" style="margin-right:8px">Vocab</span> Key Phrases</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="vocab-grid">
+            <div class="vocab-card" onclick="masterVocab(this)">
+              <div class="vocab-word">de-escalation</div>
+              <div class="vocab-pronunciation">/diːˌɛs·kəˈleɪ·ʃən/</div>
+              <div class="vocab-persian">تنش‌زدایی / کاهش تنش</div>
+              <div class="vocab-example">"I used de-escalation techniques to calm the situation."</div>
+            </div>
+            <div class="vocab-card" onclick="masterVocab(this)">
+              <div class="vocab-word">validated his feelings</div>
+              <div class="vocab-pronunciation">/ˈvæl·ɪ·deɪ·tɪd/</div>
+              <div class="vocab-persian">احساساتش را تأیید کردم</div>
+              <div class="vocab-example">"I validated his feelings before explaining the treatment plan."</div>
+            </div>
+            <div class="vocab-card" onclick="masterVocab(this)">
+              <div class="vocab-word">active listening</div>
+              <div class="vocab-pronunciation">/ˈæk·tɪv ˈlɪs·nɪŋ/</div>
+              <div class="vocab-persian">گوش دادن فعال</div>
+              <div class="vocab-example">"Active listening helped me understand the root of his frustration."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-practice" style="margin-right:8px">Practice</span> Your Story</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <p style="margin-bottom:8px">Think of YOUR experience with a difficult patient. Write your STAR answer below:</p>
+          <textarea style="width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="S: The situation was... T: My responsibility was... A: I took the following steps... R: As a result..."></textarea>
+          <div class="self-rating" id="rating-beh-1" style="margin-top:10px">
+            <span>Confidence:</span>
+            <svg class="rating-star" onclick="rateStar(this,1,'rating-beh-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,2,'rating-beh-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,3,'rating-beh-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,4,'rating-beh-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,5,'rating-beh-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 -->
+  <div class="scenario-card" data-scenario="Scenario 2">
+    <h4>"Tell me about a time you worked under high pressure."</h4>
+    <p class="scenario-prompt">This tests your composure, prioritization, and ability to function in crisis.</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Polished Answer</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="compare-box strong" style="margin:0">
+            <blockquote>"During a particularly understaffed night shift, I was managing six patients when two began showing signs of rapid deterioration simultaneously. One was experiencing a cardiac arrhythmia and the other had a sudden drop in oxygen saturation. I quickly triaged by acuity — the cardiac patient needed immediate intervention, so I activated the rapid response team for that patient while delegating continuous pulse oximetry monitoring for the second patient to my CNA with clear instructions. I stayed focused, communicated the situation clearly to the charge nurse, and ensured both patients received timely, appropriate care. Both stabilized within the hour. That night reinforced how critical it is to stay calm, prioritize systematically, and lean on your team without hesitation."</blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-vocab" style="margin-right:8px">Vocab</span> Strong Action Verbs</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <p style="margin-bottom:12px">Replace weak verbs with strong, precise ones:</p>
+          <table class="upgrade-table">
+            <thead><tr><th>❌ Weak Verb</th><th>✅ Strong Verb</th><th>فارسی</th></tr></thead>
+            <tbody>
+              <tr><td class="weak-col">I did a check</td><td class="strong-col">I assessed / I evaluated</td><td class="persian-col">ارزیابی کردم</td></tr>
+              <tr><td class="weak-col">I told the doctor</td><td class="strong-col">I communicated / I escalated</td><td class="persian-col">اطلاع دادم / تشدید کردم</td></tr>
+              <tr><td class="weak-col">I asked for help</td><td class="strong-col">I activated the rapid response team</td><td class="persian-col">تیم پاسخ سریع را فعال کردم</td></tr>
+              <tr><td class="weak-col">I gave the task</td><td class="strong-col">I delegated with clear instructions</td><td class="persian-col">با دستورالعمل واضح واگذار کردم</td></tr>
+              <tr><td class="weak-col">I kept going</td><td class="strong-col">I remained focused / I persevered</td><td class="persian-col">متمرکز ماندم / پایداری کردم</td></tr>
+              <tr><td class="weak-col">I fixed the problem</td><td class="strong-col">I intervened / I resolved the situation</td><td class="persian-col">مداخله کردم / وضعیت را حل کردم</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-practice" style="margin-right:8px">Practice</span> Your High-Pressure Story</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <textarea style="width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="Describe a specific high-pressure moment using the STAR structure and strong verbs..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 3 -->
+  <div class="scenario-card" data-scenario="Scenario 3">
+    <h4>"Tell me about a mistake you made or a lesson you learned."</h4>
+    <p class="scenario-prompt">This tests your self-awareness, honesty, and growth mindset. Don't be afraid — this is your chance to show maturity.</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-strategy" style="margin-right:8px">Strategy</span> How to Handle This</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <p>Choose a <strong>real but non-catastrophic</strong> situation. Show that you took responsibility, took action to fix it, and grew from it. The interviewer doesn't want perfection — they want <strong>honesty and professional growth</strong>.</p>
+          <div class="callout warning">
+            <div class="callout-label">⚠ Do NOT</div>
+            <p>Say "I've never made a mistake" — this sounds dishonest. Also, don't describe a major patient harm event or blame others.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Strong Answer</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="compare-box strong" style="margin:0">
+            <blockquote>"Early in my career, I was caring for a post-op patient and noticed a slight increase in their heart rate. I documented it but didn't escalate it immediately because I attributed it to post-anesthesia recovery. An hour later, the patient's condition deteriorated significantly, and the rapid response team had to be called. The patient was stabilized, but I realized I had missed an early warning sign. That experience was a turning point for me. Since then, I've adopted a 'when in doubt, escalate' mindset. I now trust my clinical instincts more and communicate even subtle changes to the healthcare team. It taught me that vigilance and proactive communication are non-negotiable in patient safety."</blockquote>
+          </div>
+          <div class="compare-rationale"><strong>Why it works:</strong> Honest but not alarming. Shows specific clinical context. Demonstrates accountability ("I realized I had missed"). Ends with concrete personal growth and a changed practice.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-practice" style="margin-right:8px">Practice</span> Your Growth Story</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <textarea style="width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="Describe a mistake or near-miss. What happened? What did you do? What did you learn?"></textarea>
+          <div class="self-rating" id="rating-beh-3" style="margin-top:10px">
+            <span>Confidence:</span>
+            <svg class="rating-star" onclick="rateStar(this,1,'rating-beh-3')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,2,'rating-beh-3')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,3,'rating-beh-3')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,4,'rating-beh-3')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            <svg class="rating-star" onclick="rateStar(this,5,'rating-beh-3')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 4 -->
+  <div class="scenario-card" data-scenario="Scenario 4">
+    <h4>"Describe a time you advocated for a patient."</h4>
+    <p class="scenario-prompt">This tests your courage, ethics, and commitment to patient welfare.</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Strong Answer</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="compare-box strong" style="margin:0">
+            <blockquote>"I had an elderly patient with limited English who was scheduled for a procedure but seemed confused and anxious — I sensed she didn't fully understand what was happening. Even though the consent form had been signed, I paused the process and requested an interpreter. Through the interpreter, we discovered she had significant concerns she hadn't been able to express. The physician came back, re-explained the procedure and the risks, and the patient felt much more comfortable proceeding. It delayed things by about 20 minutes, but I knew that informed consent isn't just a signature — it's genuine understanding. That moment reinforced my commitment to being my patients' voice when they can't fully advocate for themselves."</blockquote>
+          </div>
+          <div class="vocab-grid" style="margin-top:16px">
+            <div class="vocab-card" onclick="masterVocab(this)">
+              <div class="vocab-word">informed consent</div>
+              <div class="vocab-pronunciation">/ɪnˈfɔːrmd kənˈsɛnt/</div>
+              <div class="vocab-persian">رضایت آگاهانه</div>
+              <div class="vocab-example">"Informed consent requires genuine understanding, not just a signature."</div>
+            </div>
+            <div class="vocab-card" onclick="masterVocab(this)">
+              <div class="vocab-word">advocate for</div>
+              <div class="vocab-pronunciation">/ˈæd·və·keɪt fɔːr/</div>
+              <div class="vocab-persian">حمایت کردن از / دفاع کردن از</div>
+              <div class="vocab-example">"I always advocate for my patients' rights and well-being."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span><span class="card-badge badge-practice" style="margin-right:8px">Practice</span> Your Advocacy Story</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body">
+          <textarea style="width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="Describe a time you stood up for a patient. What was the situation? What did you do? What was the outcome?"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-complete-section" id="complete-4" onclick="completeSection(4)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+    Mark Behavioral Scenarios Complete
+  </button>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 5: CONFLICT, TEAMWORK & COMMUNICATION                      -->
+<!-- ============================================================ -->
+<div class="tab-panel" id="panel-5">
+  <div class="section-header" style="background: linear-gradient(135deg, var(--blue-light) 0%, #FFF 50%, var(--orange-light) 100%);">
+    <svg class="section-icon" viewBox="0 0 64 64" fill="none">
+      <circle cx="22" cy="28" r="10" fill="#E8F0FE" stroke="#3B6CB5" stroke-width="2"/>
+      <circle cx="42" cy="28" r="10" fill="#E6F5EF" stroke="#2E8B6A" stroke-width="2"/>
+      <path d="M30 28h4" stroke="#C8A84E" stroke-width="3" stroke-linecap="round"/>
+      <path d="M20 44 Q20 38 26 36" stroke="#3B6CB5" stroke-width="1.5" fill="none"/>
+      <path d="M44 44 Q44 38 38 36" stroke="#2E8B6A" stroke-width="1.5" fill="none"/>
+    </svg>
+    <h2>Conflict, Teamwork & Communication</h2>
+    <p>Master the diplomatic, professional language that turns workplace challenges into demonstrations of your maturity and leadership.</p>
+  </div>
+
+  <div class="section-progress">
+    <span class="section-progress-label">Section Progress</span>
+    <div class="section-progress-bar"><div class="section-progress-fill" id="progress-5" style="width:0%"></div></div>
+    <span class="section-progress-pct" id="progress-pct-5">0%</span>
+  </div>
+
+  <div class="objectives-box">
+    <h3>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      What You Will Learn
+    </h3>
+    <ul>
+      <li>How to describe conflicts professionally — without sounding negative or blaming</li>
+      <li>Diplomatic phrases for disagreeing, escalating, and collaborating</li>
+      <li>"Say it more professionally" and "Say it more naturally" exercises</li>
+      <li>Phrases for staying calm, showing respect, and resolving misunderstandings</li>
+      <li>Persian support for key communication phrases</li>
+    </ul>
+  </div>
+
+  <!-- Sub-tabs -->
+  <div class="sub-tabs">
+    <button class="sub-tab-btn active" onclick="switchSubTab('conflict', 0, this)">Diplomatic Phrases</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('conflict', 1, this)">Upgrade Your Language</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('conflict', 2, this)">Conflict Scenarios</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('conflict', 3, this)">Teamwork Language</button>
+    <button class="sub-tab-btn" onclick="switchSubTab('conflict', 4, this)">Practice</button>
+  </div>
+
+  <!-- Sub 0: Diplomatic Phrases -->
+  <div class="sub-panel active" id="conflict-sub-0">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-strategy">Essential Phrases</span>
+        <h3>The Language of Professional Diplomacy</h3>
+      </div>
+      <p style="margin-bottom:16px">In nursing interviews, how you <em>describe</em> conflict matters as much as how you <em>handled</em> it. These phrases help you sound measured, respectful, and mature.</p>
+
+      <h4 style="font-family:var(--font-display);color:var(--blue-dark);margin-bottom:12px">Disagreeing Professionally</h4>
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I respectfully raised my concern</div>
+          <div class="vocab-persian">با احترام نگرانی خودم را مطرح کردم</div>
+          <div class="vocab-example">"I respectfully raised my concern about the medication dosage with the prescribing physician."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I approached the conversation with openness</div>
+          <div class="vocab-persian">با ذهن باز وارد گفتگو شدم</div>
+          <div class="vocab-example">"I approached the conversation with openness, wanting to understand their perspective before sharing mine."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">We were able to reach a mutual understanding</div>
+          <div class="vocab-persian">توانستیم به تفاهم متقابل برسیم</div>
+          <div class="vocab-example">"After a candid discussion, we were able to reach a mutual understanding."</div>
+        </div>
+      </div>
+
+      <h4 style="font-family:var(--font-display);color:var(--blue-dark);margin:20px 0 12px">Escalating Concerns</h4>
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I followed the chain of command</div>
+          <div class="vocab-persian">از سلسله مراتب پیروی کردم</div>
+          <div class="vocab-example">"When the issue wasn't resolved at the bedside, I followed the chain of command and brought it to my charge nurse."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I escalated the concern appropriately</div>
+          <div class="vocab-persian">نگرانی را به‌طور مناسب به سطح بالاتر بردم</div>
+          <div class="vocab-example">"I felt it was important to escalate the concern appropriately to ensure patient safety."</div>
+        </div>
+      </div>
+
+      <h4 style="font-family:var(--font-display);color:var(--blue-dark);margin:20px 0 12px">Staying Calm & Composed</h4>
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I remained professional throughout</div>
+          <div class="vocab-persian">در تمام مدت حرفه‌ای باقی ماندم</div>
+          <div class="vocab-example">"Despite the tension, I remained professional throughout the interaction."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I chose to address it privately</div>
+          <div class="vocab-persian">تصمیم گرفتم خصوصی مطرحش کنم</div>
+          <div class="vocab-example">"Rather than responding in the moment, I chose to address it privately after the shift."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 1: Upgrade Your Language -->
+  <div class="sub-panel" id="conflict-sub-1">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-avoid">Avoid</span>
+        <span class="card-badge badge-model" style="margin-left:4px">Use Instead</span>
+        <h3>Say It More Professionally</h3>
+      </div>
+      <p style="margin-bottom:16px">Replace direct, blunt phrasing with diplomatic, interview-appropriate language:</p>
+
+      <table class="upgrade-table">
+        <thead><tr><th>❌ Too Direct / Weak</th><th>✅ Professional & Polished</th><th>فارسی</th></tr></thead>
+        <tbody>
+          <tr><td class="weak-col">"She was wrong."</td><td class="strong-col">"We had a difference of perspective."</td><td class="persian-col">دیدگاه‌های متفاوتی داشتیم</td></tr>
+          <tr><td class="weak-col">"I told her she was making a mistake."</td><td class="strong-col">"I respectfully shared my clinical concern."</td><td class="persian-col">با احترام نگرانی بالینیم را مطرح کردم</td></tr>
+          <tr><td class="weak-col">"We had a fight about it."</td><td class="strong-col">"We had a candid conversation about it."</td><td class="persian-col">گفتگوی صریحی درباره‌اش داشتیم</td></tr>
+          <tr><td class="weak-col">"The doctor didn't listen."</td><td class="strong-col">"I felt my concern wasn't fully addressed, so I escalated it."</td><td class="persian-col">حس کردم نگرانیم به‌طور کامل رسیدگی نشد</td></tr>
+          <tr><td class="weak-col">"My coworker was lazy."</td><td class="strong-col">"I noticed a gap in task completion and offered to help."</td><td class="persian-col">متوجه کمبود در انجام وظایف شدم و کمک پیشنهاد دادم</td></tr>
+          <tr><td class="weak-col">"It was really stressful."</td><td class="strong-col">"It was a demanding situation that required focused prioritization."</td><td class="persian-col">شرایط سختی بود که اولویت‌بندی متمرکز می‌طلبید</td></tr>
+          <tr><td class="weak-col">"I got angry."</td><td class="strong-col">"I felt frustrated, but I chose to respond constructively."</td><td class="persian-col">ناامید شدم ولی تصمیم گرفتم سازنده واکنش نشان بدهم</td></tr>
+        </tbody>
+      </table>
+
+      <div class="quiz-area" id="quiz-conflict-1" style="margin-top:24px">
+        <h4>Quick Check: Which phrasing is most appropriate for an interview?</h4>
+        <p style="font-size:14px;color:var(--text-light);margin-bottom:12px">A coworker wasn't doing their share of the work. You want to describe this in an interview.</p>
+        <div class="practice-options">
+          <button class="practice-option" onclick="checkQuiz(this, false, 'quiz-conflict-1')">"My coworker was lazy and I had to do everything."</button>
+          <button class="practice-option" onclick="checkQuiz(this, false, 'quiz-conflict-1')">"Nobody helped me so I complained to the manager."</button>
+          <button class="practice-option" onclick="checkQuiz(this, true, 'quiz-conflict-1')">"I noticed a gap in task completion, so I had a candid conversation with my colleague and offered collaborative solutions."</button>
+        </div>
+        <div class="quiz-feedback" id="quiz-conflict-1-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 2: Conflict Scenarios -->
+  <div class="sub-panel" id="conflict-sub-2">
+    <div class="scenario-card" data-scenario="Conflict">
+      <h4>"Tell me about a time you had a conflict with a coworker."</h4>
+      <p class="scenario-prompt">The interviewer wants to see how you navigate interpersonal challenges with maturity.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="toggleAccordion(this)">
+            <span><span class="card-badge badge-strategy" style="margin-right:8px">Strategy</span> Golden Rules</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body">
+            <div class="structure-box">
+              <div class="structure-step">
+                <div class="structure-num">1</div>
+                <div class="structure-text"><strong>Never blame the other person.</strong> Focus on the situation and your response, not their character.</div>
+              </div>
+              <div class="structure-step">
+                <div class="structure-num">2</div>
+                <div class="structure-text"><strong>Show initiative.</strong> Did you initiate the conversation? Did you seek understanding?</div>
+              </div>
+              <div class="structure-step">
+                <div class="structure-num">3</div>
+                <div class="structure-text"><strong>Emphasize resolution.</strong> End with how it was resolved and what you learned.</div>
+              </div>
+              <div class="structure-step">
+                <div class="structure-num">4</div>
+                <div class="structure-text"><strong>Keep patient care central.</strong> Frame the conflict in terms of its impact on patient care, not personal feelings.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="toggleAccordion(this)">
+            <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Polished Answer</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body">
+            <div class="compare-box strong" style="margin:0">
+              <blockquote>"I once had a difference of opinion with a colleague about a patient's pain management plan. She felt the current protocol was sufficient, while I believed the patient's pain was undertreated based on my assessment. Rather than letting it become a source of friction, I asked if we could discuss it together during a quiet moment. I shared my assessment findings and explained why I was concerned. She shared her perspective, which I hadn't fully considered. Together, we agreed to consult with the attending physician, who adjusted the plan. The experience taught me that constructive dialogue — when approached with mutual respect — leads to better patient outcomes than either of us could achieve alone."</blockquote>
+            </div>
+            <div class="compare-rationale"><strong>Why it works:</strong> No blame. Shows initiative ("I asked if we could discuss"). Acknowledges the other person's perspective. Ends with resolution and growth. Patient care stays central.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="toggleAccordion(this)">
+            <span><span class="card-badge badge-practice" style="margin-right:8px">Practice</span> Your Conflict Story</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body">
+            <textarea style="width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical" placeholder="Describe a workplace conflict you resolved. Remember: no blaming, show initiative, emphasize resolution..."></textarea>
+            <div class="self-rating" id="rating-conf-1" style="margin-top:10px">
+              <span>Confidence:</span>
+              <svg class="rating-star" onclick="rateStar(this,1,'rating-conf-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+              <svg class="rating-star" onclick="rateStar(this,2,'rating-conf-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+              <svg class="rating-star" onclick="rateStar(this,3,'rating-conf-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+              <svg class="rating-star" onclick="rateStar(this,4,'rating-conf-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+              <svg class="rating-star" onclick="rateStar(this,5,'rating-conf-1')" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z" fill="currentColor"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card" data-scenario="Misunderstanding" style="margin-top:36px">
+      <h4>"Tell me about a time you handled a miscommunication."</h4>
+      <p class="scenario-prompt">Shows your communication skills and ability to clarify and recover.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="toggleAccordion(this)">
+            <span><span class="card-badge badge-model" style="margin-right:8px">Model</span> Polished Answer</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body">
+            <div class="compare-box strong" style="margin:0">
+              <blockquote>"There was a situation where a verbal order from a physician was unclear — I heard 'fifteen milligrams' but the context suggested it should have been 'fifty milligrams.' Rather than assuming, I paused and used the read-back technique: I repeated the order back and asked for clarification. The physician confirmed it was indeed fifty. That moment reinforced something I practice consistently: when in doubt, always verify. I'd rather take an extra thirty seconds to clarify than risk a medication error. I now advocate for clear, written orders whenever possible and encourage my colleagues to do the same."</blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 3: Teamwork Language -->
+  <div class="sub-panel" id="conflict-sub-3">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-vocab">Teamwork Vocabulary</span>
+        <h3>Speaking About Collaboration</h3>
+      </div>
+      <p style="margin-bottom:16px">These phrases help you describe teamwork experiences with sophistication:</p>
+
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">interdisciplinary collaboration</div>
+          <div class="vocab-pronunciation">/ˌɪn·tər·ˈdɪs·ə·plɪ·ˌnɛr·i kəˌlæb·əˈreɪ·ʃən/</div>
+          <div class="vocab-persian">همکاری بین‌رشته‌ای</div>
+          <div class="vocab-example">"I thrive in environments that value interdisciplinary collaboration."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">constructive feedback</div>
+          <div class="vocab-pronunciation">/kənˈstrʌk·tɪv ˈfiːd·bæk/</div>
+          <div class="vocab-persian">بازخورد سازنده</div>
+          <div class="vocab-example">"I'm open to constructive feedback because it helps me grow."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">shared accountability</div>
+          <div class="vocab-pronunciation">/ʃɛrd əˌkaʊn·tə ˈbɪl·ə·ti/</div>
+          <div class="vocab-persian">مسئولیت‌پذیری مشترک</div>
+          <div class="vocab-example">"A strong team operates with shared accountability for patient outcomes."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">I made a point of</div>
+          <div class="vocab-pronunciation">/meɪd ə pɔɪnt ʌv/</div>
+          <div class="vocab-persian">سعی ویژه کردم / مطمئن شدم که</div>
+          <div class="vocab-example">"I made a point of checking in with the charge nurse before escalating."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">fostering a positive work environment</div>
+          <div class="vocab-pronunciation">/ˈfɑːs·tər·ɪŋ/</div>
+          <div class="vocab-persian">ایجاد محیط کاری مثبت</div>
+          <div class="vocab-example">"I believe in fostering a positive work environment where everyone feels supported."</div>
+        </div>
+        <div class="vocab-card" onclick="masterVocab(this)">
+          <div class="vocab-word">closed-loop communication</div>
+          <div class="vocab-pronunciation">/kloʊzd luːp kəˌmjuː·nɪˈkeɪ·ʃən/</div>
+          <div class="vocab-persian">ارتباط حلقه‌بسته (تأیید دریافت پیام)</div>
+          <div class="vocab-example">"I use closed-loop communication during critical handoffs to prevent errors."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub 4: Practice -->
+  <div class="sub-panel" id="conflict-sub-4">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-badge badge-practice">Practice Activities</span>
+        <h3>Say It More Professionally</h3>
+      </div>
+      <p style="margin-bottom:16px">For each weak phrase, write a more professional version in the box:</p>
+
+      <div class="q-card" style="margin-bottom:16px">
+        <div class="q-card-header" style="background:var(--red-light)">
+          <h4 style="color:var(--red)">Weak: "The doctor ignored my suggestion."</h4>
+        </div>
+        <div class="q-card-body">
+          <textarea style="width:100%;min-height:60px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;resize:vertical" placeholder="Rewrite this professionally..."></textarea>
+          <button class="reveal-btn native" onclick="toggleReveal('upgrade-1')" style="margin-top:8px">🎯 See Polished Version</button>
+          <div class="reveal-content native-version" id="upgrade-1">
+            <p><strong>Polished:</strong> "I felt my clinical concern wasn't fully considered in the moment, so I documented my assessment and followed up through the appropriate channel."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card" style="margin-bottom:16px">
+        <div class="q-card-header" style="background:var(--red-light)">
+          <h4 style="color:var(--red)">Weak: "My coworker and I didn't get along."</h4>
+        </div>
+        <div class="q-card-body">
+          <textarea style="width:100%;min-height:60px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;resize:vertical" placeholder="Rewrite this professionally..."></textarea>
+          <button class="reveal-btn native" onclick="toggleReveal('upgrade-2')" style="margin-top:8px">🎯 See Polished Version</button>
+          <div class="reveal-content native-version" id="upgrade-2">
+            <p><strong>Polished:</strong> "We had different communication styles, which initially created some friction. I took the initiative to have an open conversation, and we found a way to work together effectively."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card" style="margin-bottom:16px">
+        <div class="q-card-header" style="background:var(--red-light)">
+          <h4 style="color:var(--red)">Weak: "The family was rude and yelling at me."</h4>
+        </div>
+        <div class="q-card-body">
+          <textarea style="width:100%;min-height:60px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;resize:vertical" placeholder="Rewrite this professionally..."></textarea>
+          <button class="reveal-btn native" onclick="toggleReveal('upgrade-3')" style="margin-top:8px">🎯 See Polished Version</button>
+          <div class="reveal-content native-version" id="upgrade-3">
+            <p><strong>Polished:</strong> "The patient's family was understandably distressed and expressed their frustration vocally. I acknowledged their emotions, listened without becoming defensive, and worked to address their underlying concerns."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-card-header" style="background:var(--red-light)">
+          <h4 style="color:var(--red)">Weak: "I was right and they were wrong."</h4>
+        </div>
+        <div class="q-card-body">
+          <textarea style="width:100%;min-height:60px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;resize:vertical" placeholder="Rewrite this professionally..."></textarea>
+          <button class="reveal-btn native" onclick="toggleReveal('upgrade-4')" style="margin-top:8px">🎯 See Polished Version</button>
+          <div class="reveal-content native-version" id="upgrade-4">
+            <p><strong>Polished:</strong> "My clinical assessment proved to be accurate in that situation, but I valued the process of discussing it collaboratively because it strengthened the team's trust and communication."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-complete-section" id="complete-5" onclick="completeSection(5)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+    Mark Conflict & Teamwork Complete
+  </button>
+</div>
+
+<!-- ====== PLACEHOLDER PANELS ====== -->
+<div class="tab-panel" id="panel-0"><div class="placeholder-section"><h3>Welcome</h3><p>Covered in Part 1</p></div></div>
+<div class="tab-panel" id="panel-1"><div class="placeholder-section"><h3>Tell Me About Yourself</h3><p>Covered in Part 1</p></div></div>
+<div class="tab-panel" id="panel-2"><div class="placeholder-section"><h3>Core Interview Questions</h3><p>Covered in Part 1</p></div></div>
+<div class="tab-panel" id="panel-6"><div class="placeholder-section"><h3>Clinical Judgment & Prioritization Language</h3><p>Coming in Part 3</p></div></div>
+<div class="tab-panel" id="panel-7"><div class="placeholder-section"><h3>Advanced Nursing Vocabulary Lab</h3><p>Coming in Part 3</p></div></div>
+<div class="tab-panel" id="panel-8"><div class="placeholder-section"><h3>Fluency & Native-Like Expression Lab</h3><p>Coming in Part 3</p></div></div>
+<div class="tab-panel" id="panel-9"><div class="placeholder-section"><h3>Simulation Interview Room</h3><p>Coming in Part 4</p></div></div>
+<div class="tab-panel" id="panel-10"><div class="placeholder-section"><h3>Memory & Answer Builder Studio</h3><p>Coming in Part 4</p></div></div>
+<div class="tab-panel" id="panel-11"><div class="placeholder-section"><h3>Rapid Review</h3><p>Coming in Part 4</p></div></div>
+
+</main>
+
+<footer class="site-footer">
+  <p>Developed and Instructed by <strong>Hilary Homaii</strong></p>
+  <p style="margin-top:4px;font-size:12px;color:var(--text-muted)">Advanced RN Interview & English Fluency Mastery Lab · Part 2 of 4</p>
+</footer>
+
+<script>
+// ===== STATE =====
+let totalScore = 0;
+let vocabMastered = 0;
+let soundEnabled = true;
+const completedSections = new Set();
+
+// ===== AUDIO =====
+let audioCtx = null;
+function getAudioCtx() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); return audioCtx; }
+function playTone(f,d,t='sine',v=0.12) {
+  if(!soundEnabled) return;
+  try { const c=getAudioCtx(),o=c.createOscillator(),g=c.createGain(); o.type=t; o.frequency.value=f; g.gain.setValueAtTime(v,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+d); } catch(e){}
+}
+function playCorrectSound() { playTone(523,0.15); setTimeout(()=>playTone(659,0.15),100); setTimeout(()=>playTone(784,0.2),200); }
+function playCompleteSound() { playTone(523,0.12); setTimeout(()=>playTone(659,0.12),80); setTimeout(()=>playTone(784,0.12),160); setTimeout(()=>playTone(1047,0.3),240); }
+function playClickSound() { playTone(880,0.06,'sine',0.06); }
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundLabel').textContent = soundEnabled ? 'Sound On' : 'Sound Off';
+}
+
+function addScore(pts) {
+  totalScore += pts;
+  document.getElementById('totalScoreNum').textContent = totalScore;
+  const t = document.getElementById('scoreToast');
+  t.textContent = `+${pts} Points!`;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+  playCorrectSound();
+}
+
+// ===== TABS =====
+function switchTab(idx) {
+  playClickSound();
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => { if(!btn.classList.contains('locked')) switchTab(parseInt(btn.dataset.tab)); });
+});
+
+// ===== SUB TABS =====
+function switchSubTab(prefix, idx, btn) {
+  playClickSound();
+  btn.parentElement.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  let i=0, panel=document.getElementById(`${prefix}-sub-${i}`);
+  while(panel) { panel.classList.toggle('active', i===idx); i++; panel=document.getElementById(`${prefix}-sub-${i}`); }
+}
+
+// ===== ACCORDION =====
+function toggleAccordion(btn) { playClickSound(); btn.parentElement.classList.toggle('open'); }
+
+// ===== PERSIAN TOGGLE =====
+function togglePersian(btn) {
+  playClickSound();
+  const h = btn.nextElementSibling;
+  if(h) { if(h.classList.contains('persian-visible')) { h.classList.remove('persian-visible'); h.classList.add('persian-hidden'); } else { h.classList.remove('persian-hidden'); h.classList.add('persian-visible'); h.style.display='block'; } }
+}
+
+// ===== REVEAL =====
+function toggleReveal(id) { playClickSound(); const el = document.getElementById(id); if(el) el.classList.toggle('shown'); }
+
+// ===== PILLAR CARDS =====
+function togglePillar(card) { playClickSound(); card.classList.toggle('expanded'); if(card.classList.contains('expanded') && !card.dataset.scored) { card.dataset.scored='true'; addScore(5); } }
+
+// ===== VOCAB =====
+function masterVocab(card) {
+  if(card.dataset.mastered) return;
+  card.dataset.mastered='true';
+  card.style.borderColor='var(--green)';
+  card.style.background='linear-gradient(135deg, var(--green-light) 0%, #FFF 100%)';
+  vocabMastered++;
+  document.getElementById('vocabCount').textContent = vocabMastered;
+  addScore(5);
+}
+
+// ===== QUIZ =====
+function checkQuiz(btn, isCorrect, quizId) {
+  const parent = btn.parentElement;
+  const feedback = document.getElementById(quizId + '-feedback');
+  parent.querySelectorAll('.practice-option').forEach(b => { b.disabled=true; b.style.pointerEvents='none'; });
+  if(isCorrect) {
+    btn.classList.add('correct');
+    feedback.className = 'quiz-feedback correct';
+    feedback.textContent = 'Excellent! That phrasing is precise, professional, and interview-ready.';
+    addScore(10);
+  } else {
+    btn.classList.add('incorrect');
+    feedback.className = 'quiz-feedback incorrect';
+    feedback.textContent = 'Not quite. Look for the option that uses specific, diplomatic, professional nursing language.';
+    playTone(330,0.2,'sine',0.08);
+  }
+}
+
+// ===== SELF RATING =====
+function rateStar(star, rating, containerId) {
+  playClickSound();
+  const stars = document.getElementById(containerId).querySelectorAll('.rating-star');
+  stars.forEach((s,i) => s.classList.toggle('filled', i<rating));
+  if(rating>=4) addScore(5);
+}
+
+// ===== PHRASE INSERT =====
+function insertPhrase(targetId, phrase) {
+  playClickSound();
+  const ta = document.getElementById(targetId);
+  if(ta) { ta.value = ta.value + (ta.value?' ':'') + phrase; ta.focus(); }
+}
+
+// ===== PHILOSOPHY BUILDER =====
+function combinePhilo() {
+  playClickSound();
+  const parts = ['philo-b-1','philo-b-2','philo-b-3'].map(id => document.getElementById(id)?.value||'').filter(p => p.trim());
+  const el = document.getElementById('combinedPhilo');
+  if(parts.length===0) { el.innerHTML='<p style="color:var(--text-muted)"><em>Please fill in at least one section above to preview your philosophy statement.</em></p>'; }
+  else { el.innerHTML='<p style="font-size:15px;line-height:1.8">'+parts.join(' ')+'</p>'; addScore(10); }
+  el.classList.add('shown');
+}
+
+// ===== SECTION COMPLETE =====
+function completeSection(idx) {
+  const btn = document.getElementById(`complete-${idx}`);
+  if(completedSections.has(idx)) return;
+  completedSections.add(idx);
+  btn.classList.add('done');
+  btn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Section Complete!';
+  const tabBtn = document.querySelector(`.tab-btn[data-tab="${idx}"]`);
+  if(tabBtn) tabBtn.classList.add('completed');
+  const pct = Math.round(((completedSections.size + 3) / 12) * 100); // +3 for Part 1 sections
+  document.getElementById('globalProgressFill').style.width = pct+'%';
+  addScore(25);
+  playCompleteSound();
+}
+
+function toggleMobileStats() {
+  const s = document.querySelector('.header-stats');
+  if(s) { s.style.display = getComputedStyle(s).display==='none' ? 'flex' : 'none'; }
+}
+</script>
+
+</body>
+</html>
